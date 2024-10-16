@@ -37,7 +37,6 @@ git clone https://github.com/QuokkaStake/cosmos-node-exporter
 cd cosmos-node-exporter
 # This will generate a `cosmos-node-exporter` binary file in the repository folder
 make build
-# This will generate a `missed-blocks-checker` binary file in $GOPATH/bin
 ```
 
 To run it in detached mode in background, first, we have to copy the file to the system apps folder:
