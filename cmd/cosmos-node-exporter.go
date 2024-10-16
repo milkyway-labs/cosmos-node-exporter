@@ -56,6 +56,15 @@ func main() {
 		},
 	}
 
+	startCmd := &cobra.Command{
+		Use:     "start --config [config path]",
+		Long:    "Start the exporter.",
+		Version: version,
+		Run: func(cmd *cobra.Command, args []string) {
+			ExecuteMain(ConfigPath)
+		},
+	}
+
 	rootCmd.PersistentFlags().StringVar(&ConfigPath, "config", "", "Config file path")
 	_ = rootCmd.MarkPersistentFlagRequired("config")
 
@@ -63,6 +72,7 @@ func main() {
 	_ = validateConfigCmd.MarkPersistentFlagRequired("config")
 
 	rootCmd.AddCommand(validateConfigCmd)
+	rootCmd.AddCommand(startCmd)
 
 	if err := rootCmd.Execute(); err != nil {
 		logger.GetDefaultLogger().Panic().Err(err).Msg("Could not start application")
