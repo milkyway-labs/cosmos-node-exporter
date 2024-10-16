@@ -22,6 +22,38 @@ Specifically, if you are a validator or a node operator, you can set up alerting
 
 ## How can I set it up?
 
+### Using Docker
+
+The easiest way to set up an instance of the Cosmos node exporter is by using [Docker](https://docker.io).
+
+You can run an instance with: 
+
+```shell
+docker run -d --network host -p 9500:9500 \
+  -v /path/to/config.toml:/config.toml \
+  ghcr.io/cosmos-node-exporter:latest \
+  start --config /config.toml
+```
+
+If you want to use Docker compose you can do it as well:
+
+```yaml
+services:
+
+  cosmos-node-exporter:
+    image: ghcr.io/cosmos-node-exporter:latest
+    container_name: cosmos-node-exporter
+    restart: unless-stopped
+    network_mode: host
+    command: "start --config /config.toml"
+    ports:
+      - 9500:9500
+    volumes:
+      - /path/to/config.toml:/config.toml
+```
+
+### As a system daemon
+
 First, you need to download the latest release from [the releases page](https://github.com/QuokkaStake/cosmos-node-exporter/releases/).
 After that, you should unzip it, and you are ready to go:
 
